@@ -115,6 +115,29 @@ built_resources:
       hash: de947829
     kind: Database
     destination: build/raw/2.ice-cream-factory-db.Table.Database.yaml
+  workflows:
+  - identifier:
+      externalId: wf_icapi_data_pipeline
+    source:
+      path: /workspaces/ice-cream-dataops/ice-cream-dataops/modules/bootcamp/ice_cream_api/workflows/wf_icapi_data_pipeline.WorkFlow.yaml
+      hash: a68d1218
+    kind: Workflow
+    destination: build/workflows/1.wf_icapi_data_pipeline.WorkFlow.yaml
+  - identifier:
+      externalId: icapi_trigger
+    source:
+      path: /workspaces/ice-cream-dataops/ice-cream-dataops/modules/bootcamp/ice_cream_api/workflows/wf_icapi_data_pipeline.WorkFlowTrigger.yaml
+      hash: 4bb02ead
+    kind: WorkflowTrigger
+    destination: build/workflows/2.wf_icapi_data_pipeline.WorkFlowTrigger.yaml
+  - identifier:
+      workflowExternalId: wf_icapi_data_pipeline
+      version: '1'
+    source:
+      path: /workspaces/ice-cream-dataops/ice-cream-dataops/modules/bootcamp/ice_cream_api/workflows/wf_icapi_data_pipeline.WorkflowVersion.yaml
+      hash: 88fd04ce
+    kind: WorkflowVersion
+    destination: build/workflows/3.wf_icapi_data_pipeline.WorkflowVersion.yaml
   hosted_extractors:
   - identifier:
       externalId: ICAPI Assets
@@ -185,7 +208,7 @@ built_resources:
       externalId: contextualize_ts_assets
     source:
       path: /workspaces/ice-cream-dataops/ice-cream-dataops/modules/bootcamp/ice_cream_api/transformations/contextualize_ts_assets.Transformation.yaml
-      hash: 26b9d231
+      hash: 033d0b19
     kind: Transformation
     destination: build/transformations/1.contextualize_ts_assets.Transformation.yaml
     extra_sources:
@@ -212,19 +235,20 @@ read_modules:
 - dir: /workspaces/ice-cream-dataops/ice-cream-dataops/modules/bootcamp/use_cases/oee
   resource_directories:
   - data_sets
-  - functions
   - data_models
+  - functions
   - auth
 - dir: /workspaces/ice-cream-dataops/ice-cream-dataops/modules/bootcamp/data_foundation
   resource_directories:
   - auth
 - dir: /workspaces/ice-cream-dataops/ice-cream-dataops/modules/bootcamp/ice_cream_api
   resource_directories:
-  - hosted_extractors
   - extraction_pipelines
-  - auth
-  - data_sets
-  - raw
-  - functions
-  - transformations
   - data_models
+  - auth
+  - raw
+  - workflows
+  - hosted_extractors
+  - transformations
+  - data_sets
+  - functions
